@@ -1,4 +1,4 @@
-###官方文档总结
+### 官方文档总结
 
 > 
 Hash table based implementation of the Map interface. This implementation provides all of the optional map operations, and ***permits null values and the null key***. (The HashMap class is roughly equivalent to Hashtable, except that it is unsynchronized and permits nulls.) ***This class makes no guarantees as to the order of the map; in particular, it does not guarantee that the order will remain constant over time***.
@@ -13,7 +13,7 @@ Note that the fail-fast behavior of an iterator cannot be guaranteed as it is, g
 This class is a member of the Java Collections Framework.
 Pasted from: https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html#HashMap--
 
-###特点
+### 特点
 
 ![继承关系](https://static.javatpoint.com/images/hashmap.png)
 
@@ -22,21 +22,21 @@ Pasted from: https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html#Ha
 * 2 非线程安全（这是和``HashTable``的区别之一）
 * 3 无序列表（插入顺序和遍历的顺序是不一致的）
 
-###数据结构
+### 数据结构
 
 <img src="http://www.programmersought.com/images/232/f352701e5bd28a4a7f58d4b58aa4eff8.png" height="600 " width="1000" title="JDK 1.7前的结构">
 
 <img src="http://www.programmersought.com/images/38/243d588fc25bcd1462ad067dd312cf16.png" height="600 " width="1000" title="JDK 1.8后的结构">
 
-###源码说明
+### 源码说明
 
 * 1 ``capacity``就是``table``数组容量（默认大小16），必须是2的n次方（源码中的``table``，是一个``node``数组）
 * 2 ``threshold``即元素数量阈值，超过就扩容（等于``capacity* load factor``）
 * 3 JDK1.8后，``bucket``内部根据节点数量不同，结构不同，8或以下采用链表，8以上采用红黑树（主要是，链表查找效率是$O(N)$，在N较大的时候效率低下，红黑色是$O(lgN)$
 
-###源码分析
+### 源码分析
 
-* ####hash算法
+* #### hash算法
 ```
  /**
      * Returns a power of two size for the given target capacity.
@@ -88,7 +88,7 @@ tab[i = (n - 1) & hash]
 <img src="https://images2017.cnblogs.com/blog/1149791/201708/1149791-20170811095904120-1554448399.png" height="400 " width="600" title="扰动函数">
 
 
-* ####resize函数
+* #### resize函数
 
 ```resize函数
     /**
@@ -203,7 +203,7 @@ ___rehash的整个过程如下图：___
 
 ___注意：不要被图误导有奇偶性，这个rehash过程，移动的位置根据的是``hash``的那个bit位，而这个bit位是随机性的。___
 
-* ####put函数
+* #### put函数
 ```putval函数
     /**
      * Implements Map.put and related methods
