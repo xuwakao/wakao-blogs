@@ -37,7 +37,7 @@ END(_start)
 
 在开始读代码前，要牢牢记住``ELF``文件的格式和数据结构：
 
-![ELF format](https://img-blog.csdnimg.cn/20190515230041942.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1RheWxvclBvdHRlcg==,size_16,color_FFFFFF,t_70)
+![ELF format](https://github.com/xuwakao/wakao-assets/blob/master/aosp/elf-format-image.png?raw=true)
 
 ### 3.2 linker执行前的堆栈
 
