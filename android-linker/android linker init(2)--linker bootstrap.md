@@ -84,7 +84,7 @@ extern "C" ElfW(Addr) __linker_init(void* raw_args) {
 
   // string.h functions must not be used prior to calling the linker's ifunc resolvers.
   const ElfW(Addr) load_bias = get_elf_exec_load_bias(elf_hdr);//对于linker来说，load bias为0
-  //与ifunc的重定位相关，现在只有string.h有相关的ifunc实现（获取IFUNC resolver的地址，重定位.rela.iplt），详细可以看：
+  //与ifunc的重定位相关，现在只有string.h有相关的ifunc实现（获取IFUNC resolver的地址，重定位.rela.iplt），详细可以看：https://github.com/xuwakao/wakao-blogs/blob/master/android-linker/android-ifunc.md
   call_ifunc_resolvers(load_bias);
 
   soinfo tmp_linker_so(nullptr, nullptr, nullptr, 0, 0);
@@ -109,14 +109,14 @@ extern "C" ElfW(Addr) __linker_init(void* raw_args) {
 
 整个初始化流程为：
 
-> 1. 初始化``main thread``，主要是``TCB/TLS``。详细参考：[Linker和主线程初始化](xxxx)。
+> 1. 初始化``main thread``，主要是``TCB/TLS``。详细参考：[Linker和主线程初始化](https://github.com/xuwakao/wakao-blogs/blob/master/android-linker/android%20linker%20init(3)--main%20thread%20init.md)。
 >
 > 2. 计算一些地址相关，``elf_hdr``，``phdr``等。
 >
-> 3. ``ifunc``解释。详细参考：[Android IFUNC支持](xxxx)。
+> 3. ``ifunc``解释。详细参考：[Android IFUNC支持](https://github.com/xuwakao/wakao-blogs/blob/master/android-linker/android-ifunc.md)。
 >
 > 4. 执行``linker``的符号解释，重定位等工作。
 >
-> 5. ``linker``重定位完成后的，最终完成初始化``linker``，加载和解释``exe``等工作，并返回``exe main``。详细参考：[Linker重定位后初始化](xxxx)。
+> 5. ``linker``重定位完成后的，最终完成初始化``linker``，加载和解释``exe``等工作，并返回``exe main``。详细参考：[Linker重定位后初始化](https://github.com/xuwakao/wakao-blogs/blob/master/android-linker/android%20linker%20init(4)--after%20relocation.md)。
 
 
