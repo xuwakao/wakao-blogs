@@ -227,3 +227,5 @@ extern "C" void __libc_init_main_thread_final() {
 [ELF Handling For Thread-Local Storage](https://www.akkadia.org/drepper/tls.pdf)
 
 [Addenda to the ABI for the ARM Architecture](https://developer.arm.com/documentation/ihi0045/e/)
+
+[A Deep dive into (implicit) Thread Local Storage](https://chao-tic.github.io/blog/2018/12/25/tls)
