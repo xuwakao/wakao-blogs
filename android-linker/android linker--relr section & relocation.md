@@ -85,7 +85,7 @@ bool soinfo::relocate_relr() {
       continue;
     }
 
-    //对于值为奇数的表项，该值是bitmap，每一个非0 bit位，代表一次相对于base的便宜
+    //对于值为奇数的表项，该值是bitmap，其记录的每一个非0 bit位，代表一次相对偏移，相对base的偏移值是wordsize * n（即相对上一次offset的偏移值为wordsize）
     // Odd entry: encodes bitmap for relocations starting at base.
     offset = base;
     while (entry != 0) {
@@ -103,6 +103,10 @@ bool soinfo::relocate_relr() {
   return true;
 }
 ```
+> Note : ``android linker``中，对于``relr``的实现详细看注释。
 
+## 结论
+
+``relr section``作用是针对``R_*_RELATIVE``类型的重定位进行``shrinking``，以减少库文件的大小。
 
 

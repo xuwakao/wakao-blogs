@@ -256,6 +256,12 @@ static bool packed_relocate(Relocator& relocator, Args ...args) {
 ```
 
 最终，对各个``section``进行重定位的关键函数就是：``process_relocation_impl``。
+需要重定位的``section``包括（参考：[Native Relocations](https://chromium.googlesource.com/chromium/src.git/+/refs/heads/main/docs/native_relocations.md)）：
+
+* ``rela_/rel_`` : 即类型为``REL/RELA``，名字为``.rel.dyn/.rela.dyn``的``section``，用于对数据引用的修正。
+* ``plt_rel_/plt_rela_`` : 即类型为``JMPREL``，名字为``.rel.plt/.rela.plt``的``section``，用于对函数引用的修正。
+* ``android_relocs_`` : 即类型为``APS2``的``section``，可以理解为：带压缩的 ``rela_/rel_``（``Android compressed REL/RELA sections``， 参考： https://reviews.llvm.org/D39152）。
+* ``relr`` : : 即类型为``RELR``的``section``，主要针对``R_*_Relative``的重定位的优化，目的是减少``elf``文件大小，详细可以看：[RELR relative relocations ]()。
 
 ## process_relocation_impl ： 重定位实现
 
@@ -614,4 +620,8 @@ static bool process_relocation_impl(Relocator& relocator, const rel_t& reloc) {
   return true;
 }
 ```
+
+``relocate``的简略过程：
+1. ``lookup_symbol``在``so list``中的各个``so``中，查找``symbol``。（大致是，在``symtab``查找到``symbol name``，再根据``symbol name``的``hash``在``hash table``中查找）
+2. 根据``r_type``和上面查找到符号信息，完成不同类型的重定位。
 
