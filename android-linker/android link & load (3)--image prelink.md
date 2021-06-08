@@ -1,10 +1,11 @@
 # Android linker & loader (3) -- prelink
 
 ``dlopen``函数负责对``elf``文件进行装载，整个装载过程，可概括成总共四个步骤：
-1. 读取并映射``elf``基础信息：读取并校验``elf header``，映射``program header``,，映射``section header``，映射``.dynamic section``和``.strtab section``；
-2. 分配内存空间，装载``loadable segment``；
-3. ``prelink image`` : 从``.dynamic section``进一步获取各个段的详细信息；
-4. ``link image`` ： 进行``relocate``的工作；
+1. [Android linker & loader (1) -- Read ELF file](https://github.com/xuwakao/wakao-blogs/blob/master/android-linker/android%20link%20%26%20load%20(1)--read%20ELF.md) : 读取并映射``elf``基础信息，包括读取并校验``elf header``，映射``program header``，映射``section header``，映射``.dynamic section``和``.strtab section``；
+2. [Android linker & loader (2) -- Segment Load](https://github.com/xuwakao/wakao-blogs/blob/master/android-linker/android%20link%20%26%20load%20(2)--segment%20load.md) : 分配内存空间，装载``loadable segment``；
+3. [Android linker & loader (3) -- prelink](https://github.com/xuwakao/wakao-blogs/blob/master/android-linker/android%20link%20%26%20load%20(3)--image%20prelink.md) : 从``.dynamic section``进一步获取各个段的详细信息；
+4. [Android linker & loader (4) -- Relocate](https://github.com/xuwakao/wakao-blogs/blob/master/android-linker/android%20link%20%26%20load%20(4)--image%20link%20%26%20relocate.md) : ``link image``，进行``relocate``的工作；
+
 
 本文分析四部曲的第三部。
 

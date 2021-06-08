@@ -1,10 +1,11 @@
 # Android linker & loader (4) -- Relocate
 
 ``dlopen``函数负责对``elf``文件进行装载，整个装载过程，可概括成总共四个步骤：
-1. 读取并映射``elf``基础信息：读取并校验``elf header``，映射``program header``,，映射``section header``，映射``.dynamic section``和``.strtab section``；
-2. 分配内存空间，装载``loadable segment``；
-3. ``prelink image`` : 从``.dynamic section``进一步获取各个段的详细信息；
-4. ``link image`` ： 进行``relocate``的工作；
+1. [Android linker & loader (1) -- Read ELF file](https://github.com/xuwakao/wakao-blogs/blob/master/android-linker/android%20link%20%26%20load%20(1)--read%20ELF.md) : 读取并映射``elf``基础信息，包括读取并校验``elf header``，映射``program header``，映射``section header``，映射``.dynamic section``和``.strtab section``；
+2. [Android linker & loader (2) -- Segment Load](https://github.com/xuwakao/wakao-blogs/blob/master/android-linker/android%20link%20%26%20load%20(2)--segment%20load.md) : 分配内存空间，装载``loadable segment``；
+3. [Android linker & loader (3) -- prelink](https://github.com/xuwakao/wakao-blogs/blob/master/android-linker/android%20link%20%26%20load%20(3)--image%20prelink.md) : 从``.dynamic section``进一步获取各个段的详细信息；
+4. [Android linker & loader (4) -- Relocate](https://github.com/xuwakao/wakao-blogs/blob/master/android-linker/android%20link%20%26%20load%20(4)--image%20link%20%26%20relocate.md) : ``link image``，进行``relocate``的工作；
+
 
 本文分析四部曲的第四部。
 
@@ -261,7 +262,7 @@ static bool packed_relocate(Relocator& relocator, Args ...args) {
 * ``rela_/rel_`` : 即类型为``REL/RELA``，名字为``.rel.dyn/.rela.dyn``的``section``，用于对数据引用的修正。
 * ``plt_rel_/plt_rela_`` : 即类型为``JMPREL``，名字为``.rel.plt/.rela.plt``的``section``，用于对函数引用的修正。
 * ``android_relocs_`` : 即类型为``APS2``的``section``，可以理解为：带压缩的 ``rela_/rel_``（``Android compressed REL/RELA sections``， 参考： https://reviews.llvm.org/D39152）。
-* ``relr`` : : 即类型为``RELR``的``section``，主要针对``R_*_Relative``的重定位的优化，目的是减少``elf``文件大小，详细可以看：[RELR relative relocations ]()。
+* ``relr`` : : 即类型为``RELR``的``section``，主要针对``R_*_Relative``的重定位的优化，目的是减少``elf``文件大小，详细可以看：[RELR relative relocations ](https://github.com/xuwakao/wakao-blogs/blob/master/android-linker/android%20linker--relr%20section%20%26%20relocation.md)。
 
 ## process_relocation_impl ： 重定位实现
 
