@@ -89,6 +89,6 @@ __linker_init_post_relocation(KernelArgumentBlock& args, soinfo& tmp_linker_so) 
 >1. 继续完成``main thread``的部分初始化工作；（详细参考：[Linker和主线程初始化](https://github.com/xuwakao/wakao-blogs/blob/master/android-linker/android%20linker%20init(3)--main%20thread%20init.md)）
 >2. 完成``libc DSO``全局变量的初始化；
 >3. 完成``linker``的内部的初始化；
->4. 执行``linker_main``，完成一系列，包括：属性初始化，exe加载、加载依赖，符号解释，重定位等等；（详细参考：[Linker和Exe加载 : linker_main函数解释](https://github.com/xuwakao/wakao-blogs/blob/master/android-linker/android%20linker%20int(5)--exe%20load.md)）
+>4. 执行``linker_main``，完成一系列，包括：属性初始化，exe加载、加载依赖，符号解释，重定位等等；（详细参考：[Linker和Exe加载 : linker_main函数解释](https://github.com/xuwakao/wakao-blogs/blob/master/android-linker/android%20linker%20init(5)--exe%20load.md)）
 
 
