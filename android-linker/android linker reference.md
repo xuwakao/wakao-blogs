@@ -22,3 +22,5 @@
 [Proposal for a new section type SHT_RELR](https://groups.google.com/g/generic-abi/c/bX460iggiKg/m/Pi9aSwwABgAJ)
 
 https://www.cs.stevens.edu/~jschauma/631/elf.html
+
+[ELF Symbol Versioning](https://www.akkadia.org/drepper/symbol-versioning)
